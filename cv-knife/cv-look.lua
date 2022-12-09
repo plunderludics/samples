@@ -1,5 +1,6 @@
 
 function main()
+
     while true do
 		emu.frameadvance()
 
