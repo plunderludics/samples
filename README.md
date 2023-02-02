@@ -1,2 +1,3 @@
-each folder contains one or more of: a savestate, a config file, a lua script
-plus a bat script to run BizHawk with the target ROM and any extra configuration
+each folder should contain:
+    a file called rompath.txt with the path to the target rom; and
+    one or more of: a savestate (.State), a config file (.ini), a lua script (.lua)
