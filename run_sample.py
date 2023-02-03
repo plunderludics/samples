@@ -65,13 +65,13 @@ def run_sample_files(rom_path, title = None, save_file = None, lua_file = None, 
 		config_file = DEFAULT_CONFIG_FILE
 	
 	cmd  = [BIZHAWK_EXE]
-	cmd += ["--config", config_file] if config_file else []
-	cmd += ["--load_state", save_file] if save_file else []
-	cmd += ["--lua", lua_file] if lua_file else []
-	cmd += ["--windowtitle", title] if title else []
+	cmd += [f"--config={config_file}"] if config_file else []
+	cmd += [f"--load-state={save_file}"] if save_file else []
+	cmd += [f"--lua={lua_file}"] if lua_file else []
+	cmd += [f"--windowtitle={title}"] if title else []
 	cmd += [f'{rom_path}']
-	print(cmd)
-	process = subprocess.run(cmd)
+	print(" ".join(cmd))
+	process = subprocess.Popen(cmd)
 
 if __name__ == "__main__":
 	sample_dir = argv[1]
