@@ -33,8 +33,8 @@ def run_sample_dir(sample_dir):
 
 	# Look in the directory for save, lua or config files
 	save_files = glob.glob(os.path.join(sample_dir, "*.State"))
-	lua_files = glob.glob(os.path.join("*.lua"))
-	config_files = glob.glob(os.path.join("*.ini"))
+	lua_files = glob.glob(os.path.join(sample_dir, "*.lua"))
+	config_files = glob.glob(os.path.join(sample_dir, "*.ini"))
 
 	if len(save_files) == 0:
 		print("No save state found, will begin from start")
