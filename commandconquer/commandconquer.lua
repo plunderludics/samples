@@ -23,6 +23,7 @@ function main()
     while true do
 		emu.frameadvance()
 		
+        -- clamp cursor pos, which prevents camera from scrolling
         x = memory.read_u32_le(cursor_x.byte)
 		x = clamp(x, x_low, x_high)
         memory.write_u32_le(cursor_x.byte, x)
@@ -30,6 +31,19 @@ function main()
         y = memory.read_u32_le(cursor_y.byte)
 		y = clamp(y, y_low, y_high)
         memory.write_u32_le(cursor_y.byte, y)
+
+        -- Disable all buttons except directional and X
+        joypad.set({
+            ["○"] = false,
+            ["□"] = false,
+            ["△"] = false,
+            ["Start"] = false,
+            ["Select"] = false,
+            ["L1"] = false,
+            ["R1"] = false,
+            ["L2"] = false,
+            ["R2"] = false
+        }, 1)
 
 		-- gui.clearGraphics();
         -- gui.drawText(100, 40, x..","..y);

@@ -39,17 +39,17 @@ def run_sample_dir(sample_dir):
 	if len(save_files) == 0:
 		print("No save state found, will begin from start")
 	elif len(save_files) > 1:
-		logging.warn(f"Multiple save states found, will use only: {save_files[0]}")
+		logging.warning(f"Multiple save states found, will use only: {save_files[0]}")
 
 	if len(config_files) == 0:
 		print(f"No config file found, will use default config from {DEFAULT_CONFIG_FILE}")
 	elif len(config_files) > 1:
-		logging.warn(f"Multiple config files found, will use only: {config_files[0]}")
+		logging.warning(f"Multiple config files found, will use only: {config_files[0]}")
 
 	if len(lua_files) == 0:
 		print("No lua file found")
 	elif len(lua_files) > 1:
-		logging.warn(f"Multiple lua files found, will use only: {lua_files[0]}")
+		logging.warning(f"Multiple lua files found, will use only: {lua_files[0]}")
 
 	save_file = save_files[0] if len(save_files) else None
 	config_file = config_files[0] if len(config_files) else None
