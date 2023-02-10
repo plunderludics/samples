@@ -39,6 +39,7 @@ function main()
             ["△"] = false,
             ["Start"] = false,
             ["Select"] = false,
+            ["Analog"] = false,
             ["L2"] = false
         }, 1)
 
