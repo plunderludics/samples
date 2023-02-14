@@ -34,7 +34,7 @@ function main()
 
         -- Disable all buttons except directional and X
         joypad.set({
-            ["○"] = false,
+            -- ["○"] = false,
             ["□"] = false,
             ["△"] = false,
             ["Start"] = false,
