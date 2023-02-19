@@ -9,27 +9,58 @@ import subprocess
 import glob
 import os
 import logging
+import argparse
 
 DEFAULT_CONFIG_FILE = r"../scripts/config2.ini"
 BIZHAWK_EXE = r"../BizHawk-src/output/EmuHawk.exe"
 ROMPATH_FILE = "rompath.txt"
 
-def run_sample_dir(sample_dir):
+parser = argparse.ArgumentParser()
+parser.add_argument('sample_dir')           # positional argument
+parser.add_argument('--rom')                # option that takes a value
+
+# TODO: other args (title, save_file, lua_file, config_file)
+# TODO: sample_dir should be optional as long as you specify a rom.
+
+def run_sample_files(rom_path, title = None, save_file = None, lua_file = None, config_file = None):
+	#print((rom_path, title, save_file, lua_file, config_file))
+
+	if config_file is None:
+		config_file = DEFAULT_CONFIG_FILE
+	
+	cmd  = [BIZHAWK_EXE]
+	cmd += [f"--config={config_file}"] if config_file else []
+	cmd += [f"--load-state={save_file}"] if save_file else []
+	cmd += [f"--lua={lua_file}"] if lua_file else []
+	cmd += [f"--windowtitle={title}"] if title else []
+	cmd += [f'{rom_path}']
+	print(" ".join(cmd))
+	process = subprocess.Popen(cmd)
+
+def run_sample(args):
+	sample_dir = args.sample_dir
+	if not sample_dir:
+		logging.error("sample_dir argument must be defined")
+
 	if not os.path.isdir(sample_dir):
 		logging.error(f"Not a directory: {sample_dir}")
 
-	rompath_file = os.path.join(sample_dir, ROMPATH_FILE)
+	if not args.rom:
+		# Fill in from the rompath.txt file in sample_dir
+		rompath_file = os.path.join(sample_dir, ROMPATH_FILE)
 
-	# Assume rom path is in a file called "rompath.txt"
-	if not os.path.isfile(rompath_file):
-		logging.error(f"Expected rom path in {rompath_file}")
-		return
-	with open(rompath_file) as f:
-		rom_path = f.readline()
-		print(f"Reading rom at {rom_path}")
-		if not os.path.isfile(rom_path):
-			logging.error(f"No file at {rom_path}")
+		# Assume rom path is in a file called "rompath.txt"
+		if not os.path.isfile(rompath_file):
+			logging.error(f"Expected rom path in {rompath_file} (or provide --rom argument)")
 			return
+
+		with open(rompath_file) as f:
+			args.rom = f.readline()
+	
+	print(f"Reading rom at {args.rom}")
+	if not os.path.isfile(args.rom):
+		logging.error(f"No file at {args.rom}")
+		return
 
 	# Look in the directory for save, lua or config files
 	save_files = glob.glob(os.path.join(sample_dir, "*.State"))
@@ -56,24 +87,8 @@ def run_sample_dir(sample_dir):
 	lua_file = lua_files[0] if len(lua_files) else None
 
 	title = sample_dir.strip("/\\")
-	run_sample_files(rom_path, title, save_file, lua_file, config_file)
-
-def run_sample_files(rom_path, title = None, save_file = None, lua_file = None, config_file = None):
-	#print((rom_path, title, save_file, lua_file, config_file))
-
-	if config_file is None:
-		config_file = DEFAULT_CONFIG_FILE
-	
-	cmd  = [BIZHAWK_EXE]
-	cmd += [f"--config={config_file}"] if config_file else []
-	cmd += [f"--load-state={save_file}"] if save_file else []
-	cmd += [f"--lua={lua_file}"] if lua_file else []
-	cmd += [f"--windowtitle={title}"] if title else []
-	cmd += [f'{rom_path}']
-	print(" ".join(cmd))
-	process = subprocess.Popen(cmd)
+	run_sample_files(args.rom, title, save_file, lua_file, config_file)
 
 if __name__ == "__main__":
-	sample_dir = argv[1]
-	# TODO also allow specifying individual files directly
-	run_sample_dir(sample_dir)
+	args = parser.parse_args()
+	run_sample(args)

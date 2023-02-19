@@ -14,10 +14,10 @@ function main()
             ["△"] = false,
             ["Start"] = false,
             ["Select"] = false,
+            ["Analog"] = false,
             ["L1"] = false,
             ["R1"] = false
         }, 1)
-
 		-- gui.clearGraphics();
         -- gui.drawText(100, 40, x..","..y);
         -- print("hi");
