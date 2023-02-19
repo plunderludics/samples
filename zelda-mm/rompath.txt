@@ -1,0 +1,1 @@
+../roms/zelda-mm.n64
