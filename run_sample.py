@@ -37,15 +37,15 @@ def run_sample_files(rom_path, title = None, save_file = None, lua_file = None, 
 	print(" ".join(cmd))
 	process = subprocess.Popen(cmd)
 
-def run_sample(args):
-	sample_dir = args.sample_dir
+def run_sample(sample_dir = None, rom = None):
+	print(sample_dir)
 	if not sample_dir:
 		logging.error("sample_dir argument must be defined")
 
 	if not os.path.isdir(sample_dir):
 		logging.error(f"Not a directory: {sample_dir}")
 
-	if not args.rom:
+	if not rom:
 		# Fill in from the rompath.txt file in sample_dir
 		rompath_file = os.path.join(sample_dir, ROMPATH_FILE)
 
@@ -55,11 +55,11 @@ def run_sample(args):
 			return
 
 		with open(rompath_file) as f:
-			args.rom = f.readline()
+			rom = f.readline()
 	
-	print(f"Reading rom at {args.rom}")
-	if not os.path.isfile(args.rom):
-		logging.error(f"No file at {args.rom}")
+	print(f"Reading rom at {rom}")
+	if not os.path.isfile(rom):
+		logging.error(f"No file at {rom}")
 		return
 
 	# Look in the directory for save, lua or config files
@@ -87,8 +87,12 @@ def run_sample(args):
 	lua_file = lua_files[0] if len(lua_files) else None
 
 	title = sample_dir.strip("/\\")
-	run_sample_files(args.rom, title, save_file, lua_file, config_file)
+	title = "_"+title # total hack to make it simpler to capture the window title from unity
+	run_sample_files(rom, title, save_file, lua_file, config_file)
+
+def run_args(args):
+	run_sample(args.sample_dir, args.rom)
 
 if __name__ == "__main__":
 	args = parser.parse_args()
-	run_sample(args)
+	run_args(args)
