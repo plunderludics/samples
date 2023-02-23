@@ -16,12 +16,13 @@ function main()
     while true do
 		emu.frameadvance()
 
-        buttons = input.get()
+        pressed = joypad.getimmediate()
 
         -- Disable all buttons except directional, X, L2 and R2
+        -- Remap Circle and Square to Left and Right (rotates character)
         joypad.set({
-            -- ["○"] = false,
-            -- ["□"] = false,
+            ["○"] = pressed["P1 D-Pad Left"],
+            ["□"] = pressed["P1 D-Pad Right"],
             ["△"] = false,
             ["Start"] = false,
             ["Select"] = false,
@@ -30,7 +31,7 @@ function main()
             ["R1"] = false
         }, 1)
 		gui.clearGraphics();
-        gui.drawText(100, 40, "hi"..string.fromBytes(buttons));
+        --gui.drawText(100, 40, tostring(pressed["P1 D-Pad Left"]));
 	end
 end
 
