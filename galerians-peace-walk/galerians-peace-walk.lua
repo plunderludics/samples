@@ -65,7 +65,7 @@ function main()
         -- Disable all buttons except directional, X, L2 and R2
         joypad.set({
             ["○"] = false, -- minimap
-            ["□"] = false, -- ?
+           -- ["□"] = false, -- run
            -- ["△"] = false, -- magic wand
             ["Start"] = false,
             ["Select"] = false,
