@@ -18,7 +18,7 @@ function main()
         joypad.set({
             -- ["L1"] = pressed["P1 ○"],
             -- ["R1"] = sq_pressed,
-            ["○"] = false,
+            -- ["○"] = false, -- clear
             ["□"] = false,
             ["△"] = false,
             ["X"] = false,

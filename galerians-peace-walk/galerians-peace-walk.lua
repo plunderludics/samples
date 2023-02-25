@@ -61,7 +61,7 @@ function main()
         -- lock hp
         memory.write_s32_le(hp_addr,   h)
 
-
+        pressed = joypad.getimmediate()
         -- Disable all buttons except directional, X, L2 and R2
         joypad.set({
             ["○"] = false, -- minimap
