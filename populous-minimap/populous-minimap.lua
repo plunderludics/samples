@@ -7,6 +7,7 @@ function main()
             ["○"] = false,
             ["□"] = false,
             ["△"] = false,
+            ["X"] = false,
             ["Start"] = false,
             ["Select"] = false,
             ["Analog"] = false,
@@ -14,6 +15,7 @@ function main()
             ["R1"] = false,
             ["L2"] = false,
             ["R2"] = false
+            
         }, 1)
 
 		-- gui.clearGraphics();

@@ -7,6 +7,7 @@ function main()
             ["○"] = false,
             ["□"] = false,
             ["△"] = false,
+            ["X"] = false,
             ["Start"] = false,
             ["Select"] = false,
             ["Analog"] = false,

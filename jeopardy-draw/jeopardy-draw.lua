@@ -10,12 +10,14 @@ end
 function main()
     while true do
 		emu.frameadvance()
+        
+        pressed = joypad.getimmediate()
 
-        -- -- Freeze timer
-        memory.write_s16_le(timer_addr, 255, domain)
 
-        -- Disable everything except L1 and R1 and directional
+        -- [Remap L1 and R1 to X and O respectively, disable everything else]
         joypad.set({
+            -- ["L1"] = pressed["P1 ○"],
+            -- ["R1"] = sq_pressed,
             ["○"] = false,
             ["□"] = false,
             ["△"] = false,
@@ -25,8 +27,10 @@ function main()
             ["Select"] = false
         }, 1)
 
+        
 		-- gui.clearGraphics();
-        -- gui.drawText(100, 40, x..","..y);
+        -- gui.drawText(100, 40, tostring(pressed["P1 □"]).. tostring(sq_pressed));
+
         -- print("hi");
 	end
 end
