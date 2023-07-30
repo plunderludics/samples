@@ -20,8 +20,10 @@ function clamp(v, low, high)
 end
 
 function main()
+    client.SetVolume(5);
     while true do
-		emu.frameadvance()
+		-- emu.frameadvance()
+        emu.yield();
 		
         -- clamp cursor pos, which prevents camera from scrolling
         x = memory.read_u32_le(cursor_x.byte)

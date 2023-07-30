@@ -16,7 +16,8 @@ BIZHAWK_EXE = r"../BizHawk-src/output/EmuHawk.exe"
 ROMPATH_FILE = "rompath.txt"
 
 parser = argparse.ArgumentParser()
-parser.add_argument('sample_dir')           # positional argument
+#parser.add_argument('sample_dir')           # positional argument
+parser.add_argument('sample_dirs', nargs='+')
 parser.add_argument('--rom')                # option that takes a value
 
 # TODO: other args (title, save_file, lua_file, config_file)
@@ -91,7 +92,8 @@ def run_sample(sample_dir = None, rom = None):
 	run_sample_files(rom, title, save_file, lua_file, config_file)
 
 def run_args(args):
-	run_sample(args.sample_dir, args.rom)
+	for sample_dir in args.sample_dirs:
+		run_sample(sample_dir, args.rom) # kind of weird but fine for now
 
 if __name__ == "__main__":
 	args = parser.parse_args()

@@ -13,6 +13,7 @@ function string.fromBytes(t)
  end
 
 function main()
+    client.SetVolume(5);
     while true do
 		emu.frameadvance()
 
@@ -20,8 +21,8 @@ function main()
 
         -- Disable all buttons except directional, X, L2 and R2
         joypad.set({
-            -- ["○"] = false,
-            -- ["□"] = false,
+            ["○"] = false,
+            ["□"] = false,
             ["△"] = false,
             ["Start"] = false,
             ["Select"] = false,
@@ -29,8 +30,8 @@ function main()
             ["L1"] = false,
             ["R1"] = false
         }, 1)
-		gui.clearGraphics();
-        gui.drawText(100, 40, "hi"..string.fromBytes(buttons));
+		-- gui.clearGraphics();
+        -- gui.drawText(100, 40, "hi"..string.fromBytes(buttons));
 	end
 end
 
