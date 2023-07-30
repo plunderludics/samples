@@ -1,4 +1,5 @@
 function main()
+    client.SetVolume(10);
     while true do
         emu.frameadvance();
 
@@ -16,10 +17,6 @@ function main()
             ["L2"] = false,
             ["R2"] = false
         }, 1)
-
-		-- gui.clearGraphics();
-        -- gui.drawText(100, 40, x..","..y);
-        -- print("hi");
 	end
 end
 

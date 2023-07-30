@@ -35,12 +35,6 @@ function main()
             ["R1"] = false,
             ["L2"] = false,
             ["R2"] = false
-            
-        }, 1)
-
-		-- gui.clearGraphics();
-        -- gui.drawText(10, 10, map_left.."\n"..x.."\n"..map_right);
-        -- print("hi");
 	end
 end
 

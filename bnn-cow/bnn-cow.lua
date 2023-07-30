@@ -32,9 +32,14 @@ function main()
 		y = clamp(y, y_low, y_high)
         memory.write_s32_le(ypos.byte, y)
 
-        -- Disable all buttons except directional, X and Circle
+        -- Disable all buttons except left and right
         joypad.set({
-            -- ["○"] = false,
+            ["Up"] = false,
+            ["D-Pad Up"] = false,
+            ["Down"] = false,
+            ["D-Pad Down"] = false,
+            ["○"] = false,
+            ["X"] = false,
             ["□"] = false,
             ["△"] = false,
             ["Start"] = false,
