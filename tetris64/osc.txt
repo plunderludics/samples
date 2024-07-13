@@ -1,1 +1,0 @@
-lineclear 0x0202020 
